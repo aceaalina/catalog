@@ -1,4 +1,4 @@
-/* body {
+body {
   background-color: rgb(207, 206, 205);
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   height: 100vh;
@@ -17,8 +17,11 @@
   width: 50%;
   height: 90%;
 }
-#note-elev-wrapper {
+.hide {
   display: none;
+}
+.show {
+  display: block;
 }
 #lista-elevi-wrapper,
 #note-elev-wrapper {
@@ -74,4 +77,4 @@ button {
 button:hover {
   background-color: rgb(196, 189, 189);
   border: 1px solid grey;
-} */
+}
