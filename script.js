@@ -11,15 +11,13 @@ const butonAdaugareElev = document.getElementById("adauga-elev-btn");
 const tabelElevi = document.getElementById("tabel-elevi");
 const tabelNote = document.getElementById("tabel-note");
 const sectiuneNote = document.getElementById("note-elev-wrapper");
-const butonAscundereNote = document.getElementById("ascunde-note");
+const butonAscundeNote = document.getElementById("ascunde-note");
 const containerNoteElev = document.getElementById("note-elev-wrapper");
-
-afisareTabel(elevi);
 
 butonAdaugareElev.addEventListener("click", adaugareElevInTabel);
 tabelElevi.addEventListener("click", trateazaActiuniTabelElevi);
 tabelNote.addEventListener("click", trateazaActiuniTabeNote);
-butonAscundereNote.addEventListener("click", ascundeSectiuneNote);
+butonAscundeNote.addEventListener("click", ascundeSectiuneNote);
 
 function adaugareElevInTabel() {
   const numeElev = inputNumeElev.value;
@@ -30,6 +28,8 @@ function adaugareElevInTabel() {
   }
   afisareTabel(elevi);
 }
+
+afisareTabel(elevi);
 
 function afisareTabel(elevi) {
   const tableBody = tabelElevi.querySelector("tbody");
@@ -76,7 +76,7 @@ function trateazaActiuniTabeNote(e) {
 }
 
 function ascundeSectiuneNote() {
-  sectiuneNote.classList.add("hide");
+  tabelNote.classList.add("hide");
 }
 
 function afiseazaNote(elev) {
