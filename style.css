@@ -77,3 +77,42 @@ button:hover {
   background-color: rgb(196, 189, 189);
   border: 1px solid grey;
 }
+
+@media (max-width: 600px) {
+  .container {
+    width: 90%;
+    height: auto;
+  }
+
+  #lista-elevi-wrapper,
+  #note-elev-wrapper {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+  }
+
+  input,
+  button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+@media (min-width: 601px) and (max-width: 1024px) {
+  .container {
+    width: 70%;
+    height: auto;
+  }
+
+  #lista-elevi-wrapper,
+  #note-elev-wrapper {
+    width: 90%;
+    margin: 15px 0;
+    padding: 15px;
+  }
+
+  input,
+  button {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
