@@ -13,11 +13,25 @@ const tabelNote = document.getElementById("tabel-note");
 const sectiuneNote = document.getElementById("note-elev-wrapper");
 const butonAscundeNote = document.getElementById("ascunde-note");
 const containerNoteElev = document.getElementById("note-elev-wrapper");
+const inputNota = document.getElementById("nota");
+const butonAdaugaNota = document.getElementById("adauga-nota-btn");
+const numeElevH1 = document.getElementById("nume-elev");
+const butonSortareAsc = document.getElementById("sort-asc-btn");
+const butonSortareDesc = document.getElementById("sort-desc-btn");
+
+inputNota.addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    adaugareNota();
+  }
+});
 
 butonAdaugareElev.addEventListener("click", adaugareElevInTabel);
 tabelElevi.addEventListener("click", trateazaActiuniTabelElevi);
 tabelNote.addEventListener("click", trateazaActiuniTabeNote);
 butonAscundeNote.addEventListener("click", ascundeSectiuneNote);
+butonAdaugaNota.addEventListener("click", adaugareNota);
+butonSortareAsc.addEventListener("click", () => sorteazaElevi("asc"));
+butonSortareDesc.addEventListener("click", () => sorteazaElevi("desc"));
 
 function adaugareElevInTabel() {
   const numeElev = inputNumeElev.value;
@@ -28,8 +42,6 @@ function adaugareElevInTabel() {
   }
   afisareTabel(elevi);
 }
-
-afisareTabel(elevi);
 
 function afisareTabel(elevi) {
   const tableBody = tabelElevi.querySelector("tbody");
@@ -45,6 +57,7 @@ function afisareTabel(elevi) {
          </tr>
       `;
   }
+  console.log(tableBody);
 }
 
 function trateazaActiuniTabelElevi(e) {
@@ -77,6 +90,26 @@ function trateazaActiuniTabeNote(e) {
 
 function ascundeSectiuneNote() {
   tabelNote.classList.add("hide");
+  numeElevH1.textContent = "";
+  tabelNote.querySelector("tbody").innerHTML = "";
+}
+
+function adaugareNota() {
+  const idTableBody = tabelNote.querySelector("tbody").id;
+  const indexElev = parseInt(idTableBody.split("_")[1]);
+  const nota = parseFloat(inputNota.value);
+
+  if (!isNaN(nota)) {
+    elevi[indexElev].note.push(nota);
+    elevi[indexElev].medie =
+      elevi[indexElev].note.reduce((a, b) => a + b, 0) /
+      elevi[indexElev].note.length;
+    afiseazaNote(elevi[indexElev]);
+    afisareTabel(elevi);
+    inputNota.value = "";
+  } else {
+    alert("Introduceti o nota valida");
+  }
 }
 
 function afiseazaNote(elev) {
@@ -86,9 +119,8 @@ function afiseazaNote(elev) {
   const tableBody = tabelNote.querySelector("tbody");
 
   tableBody.innerHTML = "";
-
+  tableBody.id = `elev_${index}`;
   for (let i = 0; i <= elev.note.length - 1; i++) {
-    tableBody.id = `elev_${index}`;
     tableBody.innerHTML += ` 
         <tr id="nota_${i}">
             <td>${elev.note[i].toFixed(2)}</td>
@@ -97,3 +129,13 @@ function afiseazaNote(elev) {
     `;
   }
 }
+
+function sorteazaElevi(sortType) {
+  if (sortType === "asc") {
+    elevi.sort((a, b) => a.medie - b.medie);
+  } else if (sortType === "desc") {
+    elevi.sort((a, b) => b.medie - a.medie);
+  }
+  afisareTabel(elevi);
+}
+afisareTabel(elevi);
